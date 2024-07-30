@@ -1,7 +1,7 @@
-#+title: Emacs org mode
+#+title: Emacs Configuration
 #+author: marques
 
-* preparation
+* preparation steps
 
 - install Emacs +29
 - create file =~/.emacs.d/init.el=
@@ -16,9 +16,12 @@
 
 * general configurations
 
-** disable scratch buffer
+** TODO remove
+#+begin_src emacs-lisp
+(load-theme 'modus-vivendi)
+#+end_src
 
+** disable scratch buffer
 #+begin_src emacs-lisp
   (setq inhibit-startup-message t)
 #+end_src
-
