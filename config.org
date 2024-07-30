@@ -1,0 +1,24 @@
+#+title: Emacs org mode
+#+author: marques
+
+* preparation
+
+- install Emacs +29
+- create file =~/.emacs.d/init.el=
+- create file =~/.emacs.d/config.org=
+
+** =init.el= content
+
+#+begin_example emacs-lisp
+  (org-babel-load-file
+   (expand-file-name "config.org" user-emacs-directory))
+#+end_example
+
+* general configurations
+
+** disable scratch buffer
+
+#+begin_src emacs-lisp
+  (setq inhibit-startup-message t)
+#+end_src
+
