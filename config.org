@@ -18,8 +18,8 @@
 
 ** TODO remove
 #+begin_src emacs-lisp
-  (load-theme 'modus-vivendi)
-(org-indent-mode)
+(load-theme 'modus-vivendi)
+(org-indent-mode t)
 #+end_src
 
 ** disable scratch buffer
@@ -28,7 +28,6 @@
 #+end_src
 
 ** UI config
-
 #+begin_src emacs-lisp
   (menu-bar-mode -1) ; no menu bar
   (tool-bar-mode -1) ; no tool bar
@@ -39,4 +38,15 @@
   (save-place-mode 1) ; remember cursor position
   (recentf-mode 1) ; remember recent files
   (savehist-mode 1) ; enable history saving
+#+end_src
+
+* package manager
+
+#+begin_src emacs-lisp
+      (require 'package)
+    (setq package-archives '(("melpa" . "https://melpa.org/packages/")
+                             ("elpa" . "https://elpa.gnu.org/packages/")))
+    (package-initialize)
+    (unless package-archive-contents
+      (package-refresh-contents))
 #+end_src
