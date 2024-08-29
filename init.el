@@ -807,8 +807,8 @@ If you experience stuttering, increase this.")
   (dashboard-set-file-icons t)
   (dashboard-set-heading-icons t)
   (dashboard-image-banner-max-height 250)
-  (dashboard-banner-logo-title "[Π Ο Σ Ε Ι Δ Ο Ν 🔱 Ε Δ Ι Τ Ο Ρ]") ; [Ποσειδον 🔱 εδιτορ]
-  (dashboard-startup-banner (concat user-emacs-directory "etc/banners/ue-colorful.png"))
+  (dashboard-banner-logo-title "[ A R C H 💀 E M A C S ]") ;
+  (dashboard-startup-banner (concat user-emacs-directory "etc/banners/emacs-dragon.png"))
   :config
   (dashboard-setup-startup-hook)
   (setq dashboard-footer-icon (nerd-icons-codicon "nf-cod-calendar"
@@ -821,19 +821,14 @@ If you experience stuttering, increase this.")
           ((,(nerd-icons-codicon "nf-cod-octoface" :height 1.5 :v-adjust 0.0)
             "Homepage"
             "Browse homepage"
-            (lambda (&rest _) (browse-url "https://github.com/Likhon-baRoy/.emacs.d")) nil "" " |")
+            (lambda (&rest _) (browse-url "https://github.com/mmaachado/.emacs.d")) nil "" " |")
            (,(nerd-icons-codicon "nf-cod-refresh" :height 1.5 :v-adjust 0.0)
             "Update"
-            "Update Zmacs"
+            "Update Arch Emacs"
             (lambda (&rest _) (auto-package-update-maybe)) warning "" " |")
            (,(nerd-icons-faicon "nf-fa-flag" :height 1.5 :v-adjust 0.0) nil
             "Report a BUG"
-            (lambda (&rest _) (browse-url "https://github.com/Likhon-baRoy/.emacs.d/issues/new")) error "" ""))
-          ;; line 2
-          ;; ((,(all-the-icons-octicon "mark-github" :height 1.1 :v-adjust 0.0)
-          ;;   "AlienFriend"
-          ;;   "Browse Alien Page"
-          ;;   (lambda (&rest _) (browse-url "https://github.com/b-coimbra/.emacs.d")) nil "" ""))
+            (lambda (&rest _) (browse-url "https://github.com/mmaachado/.emacs.d/issues/new")) error "" ""))
           ;; Empty line
           (("" "\n" "" nil nil "" ""))
 
@@ -998,6 +993,11 @@ If you experience stuttering, increase this.")
          ("C-c ]" . emmet-next-edit-point)))
   )
 
+;;; wakatime
+(use-package wakatime-mode
+  :ensure t)
+(global-wakatime-mode)
+
 ;;________________________________________________________________
 ;;;    built-in
 ;;________________________________________________________________
@@ -1101,69 +1101,6 @@ If you experience stuttering, increase this.")
               ("o" . outline-hide-other)
               ("M-o" . counsel-outline)))
 
-;;;; hideshow
-;; (use-package hideshow
-;;   :hook (prog-mode . hs-minor-mode)
-;;   :bind (("S-<backspace>" . hs-hide-block)
-;;          ("C-<backspace>" . hs-show-block)
-;;          ("C-c TAB" . hs-toggle-hiding)
-;;          ("C-<tab>" . hs-cycle)
-;;          ("<backtab>" . hs-hide-level)
-;;          ("C-c h" . hs-hide-all)
-;;          ("C-c s" . hs-show-all)
-;;          ("M-+" . hs-show-all))
-;;   :config
-;;   ;; https://karthinks.com/software/simple-folding-with-hideshow/
-;;   (defun hs-cycle (&optional level)
-;;     (interactive "p")
-;;     (let (message-log-max
-;;           (inhibit-message t))
-;;       (if (= level 1)
-;;           (pcase last-command
-;;             ('hs-cycle
-;;              (hs-hide-level 1)
-;;              (setq this-command 'hs-cycle-children))
-;;             ('hs-cycle-children
-;;              ;; TODO: Fix this case. `hs-show-block' needs to be
-;;              ;; called twice to open all folds of the parent
-;;              ;; block.
-;;              (save-excursion (hs-show-block))
-;;              (hs-show-block)
-;;              (setq this-command 'hs-cycle-subtree))
-;;             ('hs-cycle-subtree
-;;              (hs-hide-block))
-;;             (_
-;;              (if (not (hs-already-hidden-p))
-;;                  (hs-hide-block)
-;;                (hs-hide-level 1)
-;;                (setq this-command 'hs-cycle-children))))
-;;         (hs-hide-level level)
-;;         (setq this-command 'hs-hide-level))))
-
-;;   (defun hs-global-cycle ()
-;;     (interactive)
-;;     (pcase last-command
-;;       ('hs-global-cycle
-;;        (save-excursion (hs-show-all))
-;;        (setq this-command 'hs-global-show))
-;;       (_ (hs-hide-all))))
-
-;;   ;; (defun hs-mode-and-hide ()
-;;   ;;   "Turn on code folding and folds all code blocks."
-;;   ;;   (interactive)
-;;   ;;   (hs-minor-mode)
-;;   ;;   (hs-hide-all))
-
-;;   ;; Add `json-mode' and `javascript-mode' to the list
-;;   (setq hs-special-modes-alist
-;;         (mapcar 'purecopy
-;;                 '((c-mode "{" "}" "/[*/]" nil nil)
-;;                   (c++-mode "{" "}" "/[*/]" nil nil)
-;;                   (java-mode "{" "}" "/[*/]" nil nil)
-;;                   (js-mode "{" "}" "/[*/]" nil)
-;;                   (json-mode "{" "}" "/[*/]" nil)
-;;                   (javascript-mode  "{" "}" "/[*/]" nil)))))
-
 ;;;; process
 (use-package proced
   :commands proced
@@ -1203,7 +1140,7 @@ If you experience stuttering, increase this.")
   :bind ("<f8>" . ispell-word) ; easy spell check
   :custom
   (ispell-program-name "hunspell") ; require Hunspell
-  (ispell-dictionary "en_US,en_GB,bn_BD")
+  (ispell-dictionary "en_US")
   (ispell-personal-dictionary "~/.emacs.d/.hunspell_personal")
   :config
   ;; Configure `LANG`, otherwise ispell.el cannot find a 'default
@@ -1281,20 +1218,6 @@ If you experience stuttering, increase this.")
                  (if (char-equal c ?<) t
                    (,electric-pair-inhibit-predicate c)))))
 
-;;;; WhiteSpaces
-;; display white spaces and newlines
-;; (setq whitespace-style '(face tabs spaces trailing space-before-tab newline indentation empty space-after-tab space-mark tab-mark newline-mark missing-newline-at-eof))
-;; (global-whitespace-mode)
-
-;;;; zonning
-;;zone out the display when it goes idle for a given length of tim
-;; (setq zone-idle-time 300)
-;; (setq zone-timer (run-with-idle-timer zone-idle-time t 'zone))
-;; (setq zone-programs [
-;; 		             zone-pgm-drip
-;; 		             zone-pgm-drip-fretfully
-;; 		             ])
-
 ;;;; Dired
 (require 'dired)
 (setq dired-listing-switches "-agho --group-directories-first"
@@ -1354,33 +1277,13 @@ If you experience stuttering, increase this.")
       eww-search-prefix "https://duckduckgo.com/html?q="
       url-privacy-level '(email agent cookies lastloc))
 
-;;;; ediff
-;; Emacs built-in ediff is more powerful than vimdiff IMHO.
-;; However, the default configuration can be improved a bit:
-
-;; (use-package ediff
-;;   :preface
-;;   (defvar my-ediff-original-windows nil)
-;;   (defun my-store-pre-ediff-winconfig ()
-;;     "Stores the window arrangement before opening ediff."
-;;     (setq my-ediff-original-windows (current-window-configuration)))
-;;   (defun my-restore-pre-ediff-winconfig ()
-;;     "Resets original window arrangement"
-;;     (set-window-configuration my-ediff-original-windows))
-;;   :hook
-;;   ((ediff-before-setup . my-store-pre-ediff-winconfig)
-;;    (ediff-quit . my-restore-pre-ediff-winconfig))
-;;   :config
-;;   (setq ediff-window-setup-function 'ediff-setup-windows-plain
-;;         ediff-split-window-function 'split-window-horizontally))
-
 ;;________________________________________________________________
 ;;		Identity Who I Am ?
 ;;________________________________________________________________
-(setq user-full-name       "Likhon Barai"
-      user-login-name      "likhon"
-      user-real-login-name "raxit"
-      user-mail-address    "likhonhere007@gmail.com")
+(setq user-full-name       "Marcelo Machado"
+      user-login-name      "marques"
+      user-real-login-name "marques"
+      user-mail-address    "uniqueduckinbox@duck.com")
 
 ;;;; Encoding
 ;; default to utf-8 for all the things
@@ -1532,11 +1435,6 @@ If you experience stuttering, increase this.")
   )
 
 ;; Set up emoji rendering
-;; Default Windows emoji font
-(when (member "Segoe UI Emoji" (font-family-list))
-  (set-fontset-font t 'symbol (font-spec :family "Segoe UI Emoji") nil 'prepend)
-  (set-fontset-font "fontset-default" '(#xFE00 . #xFE0F) "Segoe UI Emoji"))
-
 ;; Linux emoji font
 (when (member "Noto Color Emoji" (font-family-list))
   (set-fontset-font t 'symbol (font-spec :family "Noto Color Emoji") nil 'prepend)
