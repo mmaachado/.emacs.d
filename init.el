@@ -36,6 +36,8 @@
 ;;; Code:
 
 
+
+;; ─────────────────── Initial Configurations ──────────────────
 ;; BetterGC
 (defvar better-gc-cons-threshold 134217728 ; 128mb
   "If you experience freezing, decrease this.
@@ -73,6 +75,7 @@ If you experience stuttering, increase this.")
 (unless (server-running-p)
   (server-start))
 
+;; ─────────────────── Package Manager Configurations ──────────────────
 ;;; Generic packages
 (require 'package)
 ;; Select the folder to store packages
@@ -104,8 +107,6 @@ If you experience stuttering, increase this.")
 ;; and to nil for byte-compiled .emacs.elc.
 (eval-and-compile
   (setq use-package-verbose (not (bound-and-true-p byte-compile-current-file))))
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
 
 ;;; use-package
 ;; Install use-package if not installed
@@ -403,10 +404,7 @@ If you experience stuttering, increase this.")
   ;; Each node in the undo tree should have a timestamp.
   (undo-tree-visualizer-timestamps t))
 
-;;;; goto-last-change
-;; (use-package goto-last-change)
-;; :bind (("C-;" . goto-last-change)))
-
+;;;; goto-chg
 (use-package goto-chg
   :bind (("C-;"     . goto-last-change); "C-c b ,"
          ("C-c b ." . goto-last-change-reverse))
@@ -927,16 +925,6 @@ If you experience stuttering, increase this.")
     (define-fringe-bitmap 'flycheck-fringe-bitmap-double-arrow
       [16 48 112 240 112 48 16] nil nil 'center))
 
-  ;; Explanation-Mark !
-  ;; (when window-system
-  ;;   (define-fringe-bitmap 'flycheck-fringe-bitmap-double-arrow
-  ;;     [0 24 24 24 24 24 24 0 0 24 24 0 0 0 0 0 0]))
-
-  ;; BIG BitMap-Arrow
-  ;; (when (fboundp 'define-fringe-bitmap)
-  ;;   (define-fringe-bitmap 'flycheck-fringe-bitmap-double-arrow
-  ;;     [0 0 0 0 0 4 12 28 60 124 252 124 60 28 12 4 0 0 0 0]))
-
   :custom-face
   (flycheck-warning ((t (:underline (:color "#fabd2f" :style line :position line)))))
   (flycheck-error ((t (:underline (:color "#fb4934" :style line :position line)))))
@@ -990,77 +978,6 @@ If you experience stuttering, increase this.")
 (use-package wakatime-mode
   :ensure t)
 (global-wakatime-mode)
-
-;;; python
-;;; following this article https://www.jamescherti.com/elisp-code-and-emacs-packages-for-maintaining-proper-indentation-in-indentation-sensitive-languages-such-as-python-or-yaml/
-;;; code snippet
-;; this ensures that pressing ENTER will insert a new line and indent
-(global-set-key (kbd "RET") #'newline-and-indent)
-
-;; indentation based on the indentation of the previous non-blank line
-(setq-default indent-line-function #'indent-relative-first-indent-point)
-
-;; In modes such as `text-mode', calling `newline-and-indent' multiple times
-;; removes the indentation. The following fixes the issue and ensures that text
-;; is properly indented using `indent-relative' or
-;; `indent-relative-first-indent-point'.
-(setq-default indent-line-ignored-functions '())
-
-;;; indent-bars
-;; add bootstrap
-(defvar bootstrap-version)
-(let ((bootstrap-file
-       (expand-file-name
-        "straight/repos/straight.el/bootstrap.el"
-        (or (bound-and-true-p straight-base-dir)
-            user-emacs-directory)))
-      (bootstrap-version 7))
-  (unless (file-exists-p bootstrap-file)
-    (with-current-buffer
-        (url-retrieve-synchronously
-         "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
-         'silent 'inhibit-cookies)
-      (goto-char (point-max))
-      (eval-print-last-sexp)))
-  (load bootstrap-file nil 'nomessage))
-
-(use-package indent-bars
-  :ensure t
-  :commands indent-bars-mode
-  :straight (indent-bars
-             :type git
-             :host github
-             :repo "jdtsmith/indent-bars")
-  :hook ((yaml-mode . indent-bars-mode)
-         (yaml-ts-mode . indent-bars-mode)
-         (python-mode . indent-bars-mode)
-         (python-ts-mode . indent-bars-mode))
-  :custom
-  (indent-bars-prefer-character nil))
-
-;;; outline indent
-(use-package outline-indent
-  :ensure t
-  :commands (outline-indent-minor-mode
-             outline-indent-insert-heading)
-  :hook ((yaml-mode . outline-indent-minor-mode)
-         (yaml-ts-mode . outline-indent-minor-mode)
-         (python-mode . outline-indent-minor-mode)
-         (python-ts-mode . outline-indent-minor-mode))
-  :custom
-  (outline-indent-ellipsis " ▼ "))
-
-;;; dtrt indent
-(use-package dtrt-indent
-  :ensure t
-  :commands (dtrt-indent-global-mode
-             dtrt-indent-mode
-             dtrt-indent-adapt
-             dtrt-indent-undo
-             dtrt-indent-diagnosis
-             dtrt-indent-highlight)
-  :config
-  (dtrt-indent-global-mode))
 
 
 ;;________________________________________________________________
@@ -1541,13 +1458,11 @@ If you experience stuttering, increase this.")
 (update-to-load-path (expand-file-name "elpa" user-emacs-directory))
 
 ;;;; Load custom-files
-(defun load-directory (dir)
-  "Load all *.el files in a directory."
-  (let ((load-it (lambda (f)
-                   (load-file (concat (file-name-as-directory dir) f)))))
-    (mapc load-it (directory-files dir nil "\\.el$"))))
+(add-to-list 'load-path "~/.emacs.d/lisp-functions/")
 
-(load-directory "~/.emacs.d/my-lisp") ; load my configuration of packages
+;; Load splited configuration
+(require 'python-config)
+(require 'global-keys)
 
 ;;;; remove old backup files
 ;; Automatically purge backup files not accessed in a week:
