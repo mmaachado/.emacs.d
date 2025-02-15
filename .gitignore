@@ -1,11 +1,114 @@
-# Compiled
-*.elc
+# -*- mode: gitignore; -*-
 
-# Packaging
-.cask
-
-# Backup files
+# backup files
 *~
 
-# Undo-tree save-files
+### emacs
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+auto-save-list
+/auto-save-list/
+tramp
+.\#*
+*.bck*
+.custom.el
+/etc/custom.el
+
+# org-mode
+.org-id-locations
+*_archive
+
+# flymake-mode
+*_flymake.*
+
+# flycheck
+flycheck_*.el
+
+# eshell files
+/eshell/history
+/eshell/lastdir
+/etc/eshell/history
+/etc/eshell/lastdir
+
+# elpa packages
+/elpa/
+
+# compiled
+*.elc
+
+# reftex files
+*.rel
+
+# AUCTeX auto folder
+/auto/
+
+# smex
+.smex-items
+smex-items
+
+# undo-tree save-files
 *.~undo-tree
+
+# untracked directories
+/var/
+/url/
+/back/
+/edts/
+/ensime/
+/distel/
+/distel-completion/
+/my-lisp/bangla_lang.el
+/wordfreq-dicts/
+/tutorial/
+/backups/
+/savefile/
+/irony/
+
+# untracked files
+places
+ido.last
+ac-comphist.dat
+company-statistics-cache.el
+cider-history
+abbrev_defs
+recentf
+.mc-lists.el
+.last-package-update-day
+/transient/history.el
+
+# cask packages
+.cask
+.cask/
+dist/
+
+# server auth directory
+/server/
+
+# projectiles files
+.projectile
+projectile.cache
+projectile-bookmarks.eld
+
+# directory configuration
+.dir-locals.el
+
+# network security
+/network-security.data
+
+# icon must end with two \r
+Icon
+
+# thumbnails
+._*
+
+# created by git when using merge tools for conflicts
+*.BACKUP.*
+*.BASE.*
+*.LOCAL.*
+*.REMOTE.*
+*_BACKUP_*.txt
+*_BASE_*.txt
+*_LOCAL_*.txt
+*_REMOTE_*.txt
+/eln-cache/
