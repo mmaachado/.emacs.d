@@ -74,7 +74,7 @@
 #+end_src
 
 ** use-package configuration
-#+begin_src emacs-listp
+#+begin_src emacs-lisp
 (unless (package-installed-p 'use-package)
 (package-install 'use-package))
 (require 'use-package)
@@ -82,3 +82,10 @@
 #+end_src
 
 * packages
+
+** rainbow mode
+#+begin_src emacs-lisp
+    (use-package rainbow-mode
+      :diminish
+      :hook org-mode prog-mode)
+#+end_src
