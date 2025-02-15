@@ -60,3 +60,16 @@
   (global-unset-key (kbd "C-z"))
   (delete-selection-mode t)
 #+end_src
+
+* package manager configurations
+
+** package
+#+begin_src emacs-lisp
+    (require 'package)
+    (setq package-archives '(("melpa" . "https://melpa.org/packages/")
+                             ("elpa" . "https://elpa.gnu.org/packages/")))
+
+    (package-initialize)
+    (unless package-archive-contents
+      (package-refresh-contents))
+#+end_src

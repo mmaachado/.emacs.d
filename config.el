@@ -1,5 +1,5 @@
 (load-theme 'modus-vivendi)
-(org-indent-mode)
+(org-indent-mode t)
 
 (setq
  inhibit-startup-message t
@@ -24,3 +24,9 @@
 (save-place-mode 1)
 (recentf-mode 1)
 (savehist-mode 1)
+(global-display-line-numbers-mode t)
+(global-hl-line-mode t)
+
+(setq visible-bell nil)
+(global-unset-key (kbd "C-z"))
+(delete-selection-mode t)
