@@ -50,9 +50,35 @@
   (save-place-mode 1)
   (recentf-mode 1)
   (savehist-mode 1)
-  (global-display-line-numbers-mode t)
-  (global-hl-line-mode t)
 #+end_src
+
+** editor configurations
+#+begin_src emacs-lisp
+(global-display-line-numbers-mode 1)
+(setq display-line-numbers-type 'relative)
+(dolist (mode '(org-mode-hook
+  vterm-mode-hook
+  shell-mode-hook
+  eshell-mode-hook))
+(add-hook mode (lambda () (display-line-numbers-mode 0))))
+#+end_src
+
+#+begin_src emacs-lisp
+(delete-selection-mode t)
+#+end_src
+
+#+begin_src emacs-lisp
+(global-hl-line-mode t)
+#+end_src
+
+#+begin_src emacs-lisp
+(global-visual-line-mode t)
+#+end_src
+
+#+begin_src emacs-lisp
+(global-display-line-numbers-mode t)
+#+end_src
+
 
 ** sanity configurations
 #+begin_src emacs-lisp
@@ -60,6 +86,7 @@
   (global-unset-key (kbd "C-z"))
   (delete-selection-mode t)
 #+end_src
+
 
 * package manager configurations
 

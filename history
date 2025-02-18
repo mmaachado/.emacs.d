@@ -3,4 +3,4 @@
 
 (setq savehist-minibuffer-history-variables '(extended-command-history file-name-history))
 (setq extended-command-history '("org-indent-mode" "rainbow-mode" "org-indent-mode"))
-(setq file-name-history '("~/.emacs.d/config.org" "~/.emacs.d/.gitignore" "~/.emacs.d/config.org"))
+(setq file-name-history '("~/.emacs.d/config.org" "~/.emacs.d/init.el" "~/.emacs.d/config.org" "~/.emacs.d/.gitignore" "~/.emacs.d/config.org"))

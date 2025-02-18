@@ -27,6 +27,14 @@
 (global-display-line-numbers-mode t)
 (global-hl-line-mode t)
 
+(global-display-line-numbers-mode 1)
+(setq display-line-numbers-type 'relative)
+(dolist (mode '(org-mode-hook
+  vterm-mode-hook
+  shell-mode-hook
+  eshell-mode-hook))
+(add-hook mode (lambda () (display-line-numbers-mode 0))))
+
 (setq visible-bell nil)
 (global-unset-key (kbd "C-z"))
 (delete-selection-mode t)
@@ -43,4 +51,6 @@
 (require 'use-package)
 (setq use-package-always-ensure t)
 
-(use-package rainbow-mode)
+(use-package rainbow-mode
+  :diminish
+  :hook org-mode prog-mode)
