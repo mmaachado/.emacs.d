@@ -24,8 +24,6 @@
 (save-place-mode 1)
 (recentf-mode 1)
 (savehist-mode 1)
-(global-display-line-numbers-mode t)
-(global-hl-line-mode t)
 
 (global-display-line-numbers-mode 1)
 (setq display-line-numbers-type 'relative)
@@ -35,9 +33,37 @@
   eshell-mode-hook))
 (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
+(delete-selection-mode t)
+
+(global-hl-line-mode t)
+
+(global-visual-line-mode t)
+
+(global-display-line-numbers-mode t)
+
+(global-auto-revert-mode t)
+
+(fset 'yes-or-no-p 'y-or-n-p)
+
+(electric-pair-mode 1)
+
+(global-set-key (kbd "<escape>") 'keyboard-escape-quit)
+
+(global-set-key (kbd "C-=") 'text-scale-increase)
+(global-set-key (kbd "C--") 'text-scale-decrease)
+
 (setq visible-bell nil)
 (global-unset-key (kbd "C-z"))
 (delete-selection-mode t)
+
+(setq backup-directory-alist '((".*" . "~/.local/share/Trash/files")))
+
+(setq custom-file (locate-user-emacs-file "custom.el"))
+(load custom-file 'noerror 'nomessage)
+
+(set-face-attribute 'default nil :font "JetBrainsMono")
+(set-face-attribute 'variable-pitch nil :font "JetBrainsMono")
+(set-face-attribute 'fixed-pitch nil :font "JetBrainsMono")
 
 (require 'package)
 (setq package-archives '(("melpa" . "https://melpa.org/packages/")

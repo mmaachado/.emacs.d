@@ -1,5 +1,7 @@
 #+title: black emacs 🐉
 #+author: marcelo machado <uniqueduckinbox@duck.com>
+#+startp: show2levels
+#+options: toc:3
 
 * first steps
 
@@ -79,6 +81,26 @@
 (global-display-line-numbers-mode t)
 #+end_src
 
+#+begin_src emacs-lisp
+(global-auto-revert-mode t)
+#+end_src
+
+#+begin_src emacs-lisp
+(fset 'yes-or-no-p 'y-or-n-p)
+#+end_src
+
+#+begin_src emacs-lisp
+(electric-pair-mode 1)
+#+end_src
+
+#+begin_src emacs-lisp
+(global-set-key (kbd "<escape>") 'keyboard-escape-quit)
+#+end_src
+
+#+begin_src emacs-lisp
+(global-set-key (kbd "C-=") 'text-scale-increase)
+(global-set-key (kbd "C--") 'text-scale-decrease)
+#+end_src
 
 ** sanity configurations
 #+begin_src emacs-lisp
@@ -87,6 +109,28 @@
   (delete-selection-mode t)
 #+end_src
 
+
+* system configurations
+
+** backup
+#+begin_src emacs-lisp
+(setq backup-directory-alist '((".*" . "~/.local/share/Trash/files")))
+#+end_src
+
+** custom settings
+#+begin_src emacs-lisp
+(setq custom-file (locate-user-emacs-file "custom.el"))
+(load custom-file 'noerror 'nomessage)
+#+end_src
+
+
+* fonts
+
+#+begin_src emacs-lisp
+  (set-face-attribute 'default nil :font "JetBrainsMono")
+  (set-face-attribute 'variable-pitch nil :font "JetBrainsMono")
+  (set-face-attribute 'fixed-pitch nil :font "JetBrainsMono")
+#+end_src
 
 * package manager configurations
 
@@ -107,6 +151,7 @@
 (require 'use-package)
 (setq use-package-always-ensure t)
 #+end_src
+
 
 * packages
 
