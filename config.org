@@ -57,7 +57,7 @@
 ** editor configurations
 #+begin_src emacs-lisp
 (global-display-line-numbers-mode 1)
-(setq display-line-numbers-type 'relative)
+;;(setq display-line-numbers-type 'relative)
 (dolist (mode '(org-mode-hook
   vterm-mode-hook
   shell-mode-hook
@@ -160,4 +160,12 @@
     (use-package rainbow-mode
       :diminish
       :hook org-mode prog-mode)
+#+end_src
+
+** keycast
+#+begin_src emacs-lisp
+        (use-package keycast
+          :init
+          (add-to-list 'global-mode-string '("" mode-line-keycast))
+  	(keycast-mode-line-mode))
 #+end_src
