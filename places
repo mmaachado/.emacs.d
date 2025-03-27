@@ -1,13 +1,2 @@
 ;;; -*- coding: utf-8; mode: lisp-data -*-
-(("/home/marques/.emacs.d/snippets/" . 139)
- ("/home/marques/.emacs.d/" . 711)
- ("/home/marques/.emacs.d/init.el" . 1983)
- ("/home/marques/Documents/scan.py" . 128)
- ("/home/marques/.emacs.d/.git/"
-  (dired-filename . "/home/marques/.emacs.d/.git/config"))
- ("/home/marques/.emacs.d/nano/"
-  (dired-filename . "/home/marques/.emacs.d/nano/nano-writer.el"))
- ("/home/marques/.emacs.d/nano/nano-writer.el" . 5016)
- ("/home/marques/.emacs.d/nano/nano-splash.el" . 3400)
- ("/home/marques/.emacs.d/nano/nano.el" . 2131)
- ("/home/marques/.emacs.d/nano/nano-layout.el" . 3004))
+(("/home/marques/.emacs.d/.gitignore" . 695))
