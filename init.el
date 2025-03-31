@@ -1,5 +1,5 @@
 ;; gc 
-(setq gc-cons-threshold (* 50 1000 1000))
+(setq gc-cons-threshold (* 100 1024 1024))
 
 ;; general variables
   (setq inhibit-startup-message t                    ; no welcome buffer
@@ -91,7 +91,7 @@
 
 (global-set-key (kbd "M-<up>") 'move-line-up)
 (global-set-key (kbd "M-<down>") 'move-line-down)
-(global-set-key (kbd "C-d") 'duplicate-line)
+(global-set-key (kbd "C-c v") 'duplicate-line)
 
 ;; package
 (require 'package)
@@ -114,7 +114,7 @@
     :config
     (setq dashboard-items '((bookmarks . 20)
                             (agenda . 20)))
-    (setq dashboard-set-navigator t
+    (setq dashboard-startupify-list t
           dashboard-agenda-release-buffers nil
           dashboard-set-heading-icons t
           dashboard-set-file-icons t
@@ -146,6 +146,8 @@
   (setq which-key-idle-delay 0.3)
   (setq which-key-show-early-on-C-h t))
 
+(use-package yasnippet)
+
 ;; company
 (use-package company
   :diminish company-mode
@@ -154,7 +156,7 @@
 ;; flycheck
 (use-package flycheck
   :ensure t
-  :hook (prog-mode-hook . flycheck-mode))
+  :init (global-flycheck-mode))
 
 ;; rainbow mode
 (use-package rainbow-mode)
@@ -163,8 +165,16 @@
 (use-package lsp-mode
   :hook ((web-mode . lsp)
          (python-mode . lsp)
-	     (c-mode .lsp))
+	 (c-mode .lsp))
   :commands lsp
   :config
   (setq lsp-clients-clangd-executable "/usr/bin/clangd") 
   (setq lsp-completion-provider :capf))
+
+(add-hook 'c-mode-hook 'lsp)
+
+;; wakatime
+(use-package wakatime-mode)
+(global-wakatime-mode)
+
+;;; init.el ends here
