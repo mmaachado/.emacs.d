@@ -114,7 +114,7 @@
     :config
     (setq dashboard-items '((bookmarks . 20)
                             (agenda . 20)))
-    (setq dashboard-startupify-list t
+    (setq dashboard-set-navigator t
           dashboard-agenda-release-buffers nil
           dashboard-set-heading-icons t
           dashboard-set-file-icons t
@@ -166,12 +166,24 @@
   :hook ((web-mode . lsp)
          (python-mode . lsp)
 	 (c-mode .lsp))
-  :commands lsp
-  :config
-  (setq lsp-clients-clangd-executable "/usr/bin/clangd") 
-  (setq lsp-completion-provider :capf))
+  :commands lsp)
 
 (add-hook 'c-mode-hook 'lsp)
+(add-hook 'python-mode-hook 'lsp)
+
+;; jedi
+(use-package jedi)
+(add-hook 'python-mode-hook 'jedi:ac-setup)
+(setq jedi:complete-on-dot t)
+
+;; deferred
+(use-package deferred)
+
+;; auto-complete
+(use-package auto-complete)
+
+;; flyc
+(add-hook 'after-init-hook #'global-flycheck-mode)
 
 ;; wakatime
 (use-package wakatime-mode)

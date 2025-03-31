@@ -78,6 +78,7 @@ recentf
 .mc-lists.el
 .last-package-update-day
 /transient/history.el
+.lsp-session*
 
 # cask packages
 .cask
