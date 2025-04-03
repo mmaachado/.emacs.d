@@ -127,6 +127,18 @@
   (setq initial-buffer-choice (lambda ()
                                 (get-buffer-create "*dashboard*")))
 
+;; all the icons
+(use-package all-the-icons
+  :ensure t)
+
+;; neotree
+;; need install all-the-icons-fonts
+(use-package neotree
+  :ensure t
+  :config
+  (progn(setq neo-theme (if (display-graphic-p) 'icons 'arrow))))
+(global-set-key (kbd "C-b") 'neotree-toggle)
+
 ;; doom themes
   (use-package doom-themes
     :ensure t
@@ -144,6 +156,7 @@
   :diminish which-key-mode
   :config
   (setq which-key-idle-delay 0.3)
+  
   (setq which-key-show-early-on-C-h t))
 
 (use-package yasnippet)
@@ -156,10 +169,15 @@
 ;; flycheck
 (use-package flycheck
   :ensure t
-  :init (global-flycheck-mode))
+  :init (global-flycheck-mode t))
 
 ;; rainbow mode
 (use-package rainbow-mode)
+
+(use-package python-mode
+  :ensure t
+  :custom
+  (python-shell-interpreter "python"))
 
 ;; lsp
 (use-package lsp-mode
@@ -171,16 +189,20 @@
 (add-hook 'c-mode-hook 'lsp)
 (add-hook 'python-mode-hook 'lsp)
 
-;; jedi
-(use-package jedi)
-(add-hook 'python-mode-hook 'jedi:ac-setup)
-(setq jedi:complete-on-dot t)
+;; https://gist.github.com/habamax/290cda0e0cdc6118eb9a06121b9bc0d7
+(setq major-mode-remap-alist
+      '((python-mode . python-ts-mode)))
 
 ;; deferred
 (use-package deferred)
 
 ;; auto-complete
-(use-package auto-complete)
+(use-package auto-complete
+  :ensure t
+  :init
+  (progn
+    (ac-config-default)
+    (global-auto-complete-mode t)))
 
 ;; flyc
 (add-hook 'after-init-hook #'global-flycheck-mode)

@@ -115,3 +115,5 @@ Icon
 *_LOCAL_*.txt
 *_REMOTE_*.txt
 /eln-cache/
+
+tree-sitter/
