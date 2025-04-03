@@ -139,6 +139,7 @@
   (progn(setq neo-theme (if (display-graphic-p) 'icons 'arrow))))
 (global-set-key (kbd "C-b") 'neotree-toggle)
 
+
 ;; doom themes
   (use-package doom-themes
     :ensure t
